@@ -1,4 +1,4 @@
-Flow.Login [![Build Status](https://travis-ci.org/svparijs/Flow.Login.png?branch=master)](https://travis-ci.org/svparijs/Flow.Login)
+Flow.Login
 ==================================================================================================================================================================
 
 A TYPO3 Flow package that manages accounts and login authentication.
