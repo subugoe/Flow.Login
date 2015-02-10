@@ -29,8 +29,8 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 	 * @var array
 	 */
 	protected $viewFormatToObjectNameMap = array(
-		'html'  => 'TYPO3\Fluid\View\TemplateView',
-		'json'  => 'TYPO3\Flow\Mvc\View\JsonView');
+			'html' => 'TYPO3\Fluid\View\TemplateView',
+			'json' => 'TYPO3\Flow\Mvc\View\JsonView');
 
 	/**
 	 * @var \TYPO3\Flow\I18n\Translator
@@ -58,7 +58,7 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 	 */
 	public function indexAction($username = NULL) {
 		if ($this->authenticationManager->isAuthenticated()) {
-			if(isset($this->settings['Redirect']['signedIn'])) {
+			if (isset($this->settings['Redirect']['signedIn'])) {
 				$redirect = $this->settings['Redirect']['signedIn'];
 				$this->redirect($redirect['actionName'], $redirect['controllerName'], $redirect['packageKey']);
 			}
@@ -86,7 +86,11 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 	 *
 	 * @return void
 	 */
-	public function signedInAction(){
+	public function signedInAction() {
+		if (isset($this->settings['Redirect']['signedIn'])) {
+			$redirect = $this->settings['Redirect']['signedIn'];
+			$this->redirect($redirect['actionName'], $redirect['controllerName'], $redirect['packageKey']);
+		}
 	}
 
 	/**
@@ -107,15 +111,15 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 	public function onAuthenticationSuccess(\TYPO3\Flow\Mvc\ActionRequest $originalRequest = NULL) {
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		if ($originalRequest !== NULL) {
-			$uri =  $uriBuilder->uriFor($originalRequest->getControllerActionName(), $originalRequest->getArguments(), $originalRequest->getControllerName(), $originalRequest->getControllerPackageKey());
+			$uri = $uriBuilder->uriFor($originalRequest->getControllerActionName(), $originalRequest->getArguments(), $originalRequest->getControllerName(), $originalRequest->getControllerPackageKey());
 		} else {
-			if(isset($this->settings['Redirect']['signedIn'])) {
-				$packageKey     = $this->settings['Redirect']['signedIn']['packageKey'];
+			if (isset($this->settings['Redirect']['signedIn'])) {
+				$packageKey = $this->settings['Redirect']['signedIn']['packageKey'];
 				$controllerName = $this->settings['Redirect']['signedIn']['controllerName'];
-				$actionName     = $this->settings['Redirect']['signedIn']['actionName'];
+				$actionName = $this->settings['Redirect']['signedIn']['actionName'];
 				$uri = $uriBuilder->uriFor($actionName, NULL, $controllerName, $packageKey);
 			} else {
-				$uri = $uriBuilder->uriFor('signIn', NULL, 'Login', 'Flow.Login');
+				$uri = $uriBuilder->uriFor('signedIn', NULL, 'Login', 'Flow.Login');
 			}
 		}
 
@@ -138,28 +142,9 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 			default :
 				$this->flashMessageContainer->addMessage(new \TYPO3\Flow\Error\Message('Successfully logged out.', 1318421560));
 				$this->redirect('index');
-			break;
+				break;
 		}
 	}
-
-//	/**
-//	 * A template method for displaying custom error flash messages, or to
-//	 * display no flash message at all on errors. Override this to customize
-//	 * the flash message in your action controller.
-//	 *
-//	 * This method is used to overwrite default error messages template TYPO3.Flow package
-//	 *
-//	 * @return \TYPO3\Flow\Error\Error The flash message
-//	 */
-//	protected function getErrorFlashMessage() {
-//		/*return new \TYPO3\Flow\Error\Message(
-//			$this->translator->translateById('message.authentication.failed.wrongCredentials', array(), NULL, NULL, 'Main', 'Flow.Login'),
-//			NULL,
-//			array(),
-//			$this->translator->translateById('message.authentication.failed', array(), NULL, NULL, 'Main', 'Flow.Login')
-//		);
-//		*/
-//	}
 
 	/**
 	 * Collects the errors and serves them
@@ -167,8 +152,8 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 	 * @return void
 	 */
 	protected function errorAction() {
-			// Create response array
-			// @todo translations
+		// Create response array
+		// @todo translations
 		$response = array();
 		$response['status'] = 'FAILED';
 		$response['errors'] = $this->flashMessageContainer->getMessagesAndFlush();
@@ -176,5 +161,3 @@ class LoginController extends \TYPO3\Flow\Security\Authentication\Controller\Abs
 	}
 
 }
-
-?>
