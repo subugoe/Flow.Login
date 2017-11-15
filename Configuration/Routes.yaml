@@ -9,3 +9,11 @@
     '@controller': 'Login'
     '@action':     'index'
     '@format':     'html'
+
+-
+  name: 'Logout'
+  uriPattern: 'logout'
+  defaults:
+    '@package':    'Flow.Login'
+    '@controller': 'Login'
+    '@action':     'logout'

@@ -1,3 +1,108 @@
+privilegeTargets:
+  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+
+    'Flow.Login:SignedInAction':
+      matcher: 'method(Refactory\Login\Controller\LoginController->signedInAction())'
+    'Kloster_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\KlosterController->.*Action())'
+    'Bearbeiter_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\BearbeiterController->.*Action())'
+    'Orden_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\OrdenController->.*Action())'
+    'Bistum_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\BistumController->.*Action())'
+    'Band_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\BandController->.*Action())'
+    'Ort_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\OrtController->.*Action())'
+    'Land_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\LandController->.*Action())'
+    'Bearbeitungsstatus_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\BearbeitungsstatusController->.*Action())'
+    'Personallistenstatus_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\PersonallistenstatusController->.*Action())'
+    'Ordenstyp_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\OrdenstypController->.*Action())'
+    'Urltyp_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\UrltypController->.*Action())'
+    'Dump_Methods':
+      matcher: 'method(Subugoe\GermaniaSacra\Controller\DumpController->.*Action())'
+
 roles:
-  TYPO3.AccountManagement:Administrator: []
-  TYPO3.AccountManagement:Editor: []
+  'Flow.Login:Administrator':
+    privileges:
+      -
+        privilegeTarget: 'Flow.Login:SignedInAction'
+        permission: GRANT
+      -
+        privilegeTarget: 'Kloster_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Bearbeiter_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Orden_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Bistum_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Band_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Ort_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Land_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Bearbeitungsstatus_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Personallistenstatus_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Ordenstyp_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Urltyp_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Dump_Methods'
+        permission: GRANT
+
+  'Flow.Login:Hiwi':
+    privileges:
+      -
+        privilegeTarget: 'Flow.Login:SignedInAction'
+        permission: GRANT
+      -
+        privilegeTarget: 'Kloster_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Orden_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Bistum_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Band_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Ort_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Land_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Bearbeitungsstatus_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Personallistenstatus_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Ordenstyp_Methods'
+        permission: GRANT
+      -
+        privilegeTarget: 'Urltyp_Methods'
+        permission: GRANT
